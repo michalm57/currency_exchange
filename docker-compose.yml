@@ -1,0 +1,39 @@
+version: '3'
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+  www:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - "./:/var/www/html"
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - db
+    links:
+      - db
+    environment:
+      - DB_HOST=db
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=currency_exchange
+      - MYSQL_USER=currency_exchange_user
+      - MYSQL_PASSWORD=password
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+    volumes:
+      - "./db:/docker-entrypoint-initdb.d"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306

@@ -1,0 +1,20 @@
+header {
+    background: #e3e3e3;
+    padding: 2em;
+    text-align: center;
+}
+
+body {
+    background: #999;
+    text-align: center;
+}
+
+nav {
+    text-align: center;
+    word-spacing: 30px;
+}
+
+.nav-li {
+    display: inline;
+    text-align: center;
+}
