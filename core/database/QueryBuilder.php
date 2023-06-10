@@ -107,4 +107,21 @@ class QueryBuilder
             }
         }
     }
+
+    /**
+     * Select Query with WHERE clause
+     *
+     * Retrieves rows from the specified table based on the given condition.
+     *
+     * @param string $table The name of the table to select from.
+     * @param string $condition The WHERE condition to apply.
+     * @param array $params An array of parameters to bind to the prepared statement.
+     * @return array An array of objects representing the selected rows.
+     */
+    public function selectWhere($table, $condition, $params = array())
+    {
+        $query = $this->pdo->prepare("SELECT * FROM {$table} WHERE {$condition}");
+        $query->execute($params);
+        return $query->fetchAll(PDO::FETCH_CLASS);
+    }
 }

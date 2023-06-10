@@ -1,6 +1,7 @@
-<?php require 'partials/head.php';?>
+<?php require 'partials/head.php'; ?>
 <title>Currencies</title>
-<table id="currencies-table">
+<div class="table-container justify-content-center">
+    <table id="currencies-table">
         <thead>
             <tr>
                 <th>Name</th>
@@ -9,7 +10,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($currencies as $currency): ?>
+            <?php foreach ($currencies as $currency) : ?>
                 <tr>
                     <td><?= $currency->name; ?></td>
                     <td><?= $currency->code; ?></td>
@@ -18,4 +19,5 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-<?php require 'partials/footer.php';?>
+</div>
+<?php require 'partials/footer.php'; ?>

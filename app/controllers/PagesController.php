@@ -43,13 +43,62 @@ class PagesController
      */
     public function currencies()
     {
+        $this->currencyService->updateCurrencies();
+
         $currencies = $this->currencyService->getAllCurrencies();
-        
+
         return view('currencies', compact('currencies'));
     }
 
-    public function updateCurrencies()
+    /**
+     * Echchange Page Action
+     *
+     * This function is responsible for handling the echange page request.
+     *
+     * @return string The rendered view for the exchange page.
+     */
+    public function exchange()
     {
-        return $this->currencyService->updateCurrencies();
+        $codesValues = $this->currencyService->getAllCodes();
+
+        return view('exchange', compact('codesValues'));
+    }
+
+    /**
+     * Calculate exchange
+     *
+     * This function is responsible for calculatiing exchnages.
+     *
+     */
+    public function calculateExchange()
+    {
+        $data = [
+            'amount' => $_POST['amount'],
+            'source_currency_id' => $_POST['source_currency_id'],
+            'target_currency_id' => $_POST['target_currency_id'],
+        ];
+
+        //TODO
+        // $this->currencyService->validate($data);
+
+        $this->currencyService->exchange($data);
+
+        return $this->history(true);
+    }
+
+    /**
+     * Exchange History
+     *
+     * This function is responsible for calculatiing exchnages.
+     *
+     */
+    public function history($exchangeRedirect = false)
+    {
+        $historyRecords = $this->currencyService->getHistory();
+
+        return view('history', [
+            'historyRecords' => $historyRecords,
+            'exchangeRedirect' => $exchangeRedirect
+        ]);
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db:3306
--- Generation Time: Jun 10, 2023 at 10:02 AM
+-- Generation Time: Jun 10, 2023 at 09:23 AM
 -- Server version: 8.0.32
 -- PHP Version: 8.1.17
 
@@ -24,33 +24,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `exchange_rates`
+-- Table structure for table `exchange_history`
 --
 
-CREATE TABLE `exchange_rates` (
+CREATE TABLE `exchange_history` (
   `id` int NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `code` varchar(255) NOT NULL,
-  `rate` float NOT NULL,
+  `amount` float NOT NULL,
+  `source_currency` varchar(255) NOT NULL,
+  `target_currency` varchar(255) NOT NULL,
+  `amount_after_conversion` float NOT NULL,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `exchange_rates`
---
-
-INSERT INTO `exchange_rates` (`id`, `name`, `code`, `rate`, `updated_at`, `created_at`) VALUES
-(1, 'złoty (Polska)', 'PLN', 1, '2023-06-10 10:02:55', '2023-06-10 10:02:55');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `exchange_rates`
+-- Indexes for table `exchange_history`
 --
-ALTER TABLE `exchange_rates`
+ALTER TABLE `exchange_history`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -58,10 +52,10 @@ ALTER TABLE `exchange_rates`
 --
 
 --
--- AUTO_INCREMENT for table `exchange_rates`
+-- AUTO_INCREMENT for table `exchange_history`
 --
-ALTER TABLE `exchange_rates`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `exchange_history`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
