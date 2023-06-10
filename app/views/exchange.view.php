@@ -1,5 +1,4 @@
 <?php require 'partials/head.php'; ?>
-<title>Exchange</title>
 <div class="justify-content-center d-flex">
     <form method="POST" action="/exchange/calculate-exchange" class="form form-container">
         <div class="form-group">

@@ -1,5 +1,4 @@
 <?php require 'partials/head.php'; ?>
-<title>Currencies</title>
 <div class="table-container justify-content-center">
     <table id="exchange-history-table">
         <thead>
