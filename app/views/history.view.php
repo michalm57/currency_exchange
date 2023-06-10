@@ -4,7 +4,7 @@
     <table id="exchange-history-table">
         <thead>
             <tr>
-                <th>Sorce</th>
+                <th>Source</th>
                 <th>Target</th>
                 <th>Date</th>
             </tr>
