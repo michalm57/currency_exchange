@@ -3,6 +3,10 @@
 <html lang="eng">
 <head>
     <meta charset="UTF-8">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png" />
+
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="/public/css/style.css"></link>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"></link>

@@ -1,4 +1,6 @@
 <?php require 'partials/head.php'; ?>
 <title>Currency Exchange</title>
-<h1>Welcome to Currency Exchange</h1>
+<div class="mt-5">
+    <img src="/logo.png" width="250"/>
+</div>
 <?php require 'partials/footer.php'; ?>
