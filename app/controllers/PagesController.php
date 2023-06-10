@@ -81,6 +81,11 @@ class PagesController
         //TODO
         // $this->currencyService->validate($data);
 
+        $_SESSION['alert'] = [
+            'type' => 'success',
+            'message' => 'The currency exchange operation was successful.'
+        ];
+
         $this->currencyService->exchange($data);
 
         return $this->history(true);

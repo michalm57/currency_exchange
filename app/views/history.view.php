@@ -1,5 +1,14 @@
-<?php require 'partials/head.php'; ?>
+<?php require 'partials/head.php';
+?>
 <div class="table-container justify-content-center">
+    <?php
+    if (isset($_SESSION['alert'])) {
+        $alert = $_SESSION['alert'];
+        unset($_SESSION['alert']);
+
+        echo '<div class="alert alert-' . $alert['type'] . '">' . $alert['message'] . '</div>';
+    }
+    ?>
     <table id="exchange-history-table">
         <thead>
             <tr>
