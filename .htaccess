@@ -21,4 +21,8 @@
     RewriteRule ^ index.php [L]
 </IfModule>
 
+<Files "config.php">
+    deny from all
+</Files>
+
 ErrorDocument 404 core/error.php
