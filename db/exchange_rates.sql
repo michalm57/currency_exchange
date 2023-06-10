@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db:3306
--- Generation Time: Jun 08, 2023 at 02:33 PM
+-- Generation Time: Jun 10, 2023 at 06:58 AM
 -- Server version: 8.0.32
 -- PHP Version: 8.1.17
 
@@ -29,19 +29,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `exchange_rates` (
   `id` int NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `rate` float DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `rate` float NOT NULL,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `exchange_rates`
---
-
-INSERT INTO `exchange_rates` (`id`, `name`, `rate`, `updated_at`, `created_at`) VALUES
-(1, 'EUR', 4.48, '2023-06-08 14:33:42', '2023-06-08 14:33:42'),
-(2, 'USD', 4.16, '2023-06-08 14:33:42', '2023-06-08 14:33:42');
 
 --
 -- Indexes for dumped tables
@@ -61,7 +54,7 @@ ALTER TABLE `exchange_rates`
 -- AUTO_INCREMENT for table `exchange_rates`
 --
 ALTER TABLE `exchange_rates`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

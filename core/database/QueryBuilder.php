@@ -58,4 +58,53 @@ class QueryBuilder
         }
     }
 
+    /**
+     * Update or Insert Query for a single unique column
+     *
+     * Updates an existing row based on a unique column value or inserts a new row if it doesn't exist.
+     *
+     * @param string $table The name of the table to update or insert into.
+     * @param array $data An associative array of column-value pairs to be updated or inserted.
+     * @param string $uniqueColumn The column name that makes a record unique.
+     * @return void
+     */
+    public function updateOrInsert($table, $data, $uniqueColumn)
+    {
+        $uniqueValue = $data[$uniqueColumn];
+        unset($data[$uniqueColumn]);
+
+        $selectSql = "SELECT COUNT(*) as count FROM $table WHERE $uniqueColumn = :$uniqueColumn";
+        $selectStatement = $this->pdo->prepare($selectSql);
+        $selectStatement->execute([$uniqueColumn => $uniqueValue]);
+        $result = $selectStatement->fetch(PDO::FETCH_ASSOC);
+
+        if ($result['count'] > 0) {
+            $updateColumns = [];
+            foreach ($data as $column => $value) {
+                $updateColumns[] = $column . ' = :' . $column;
+            }
+            $updateColumns = implode(', ', $updateColumns);
+
+            $sql = "UPDATE $table SET $updateColumns WHERE $uniqueColumn = :$uniqueColumn";
+
+            try {
+                $updateStatement = $this->pdo->prepare($sql);
+                $updateStatement->execute(array_merge([$uniqueColumn => $uniqueValue], $data));
+            } catch (Exception $e) {
+                die('Whoops, something went wrong!');
+            }
+        } else {
+            $columns = implode(', ', array_keys($data));
+            $placeholders = ':' . implode(', :', array_keys($data));
+
+            $sql = "INSERT INTO $table ($uniqueColumn, $columns) VALUES (:$uniqueColumn, $placeholders)";
+
+            try {
+                $insertStatement = $this->pdo->prepare($sql);
+                $insertStatement->execute(array_merge([$uniqueColumn => $uniqueValue], $data));
+            } catch (Exception $e) {
+                die('Whoops, something went wrong!');
+            }
+        }
+    }
 }
