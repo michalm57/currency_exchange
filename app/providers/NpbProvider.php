@@ -9,6 +9,9 @@ class NpbProvider
     private $curlHandle;
     private $url;
 
+    const TABLE_TYPE_A = 'A';
+    const TABLE_TYPE_B = 'B';
+
     /**
      * NpbProvider constructor.
      *
@@ -18,7 +21,7 @@ class NpbProvider
     public function __construct()
     {
         $this->curlHandle = curl_init();
-        $this->url = App::get('config')['npb_api']['echange_rates_url'];
+        $this->url = str_replace(':tableType', self::TABLE_TYPE_A, App::get('config')['npb_api']['echange_rates_url']);    
     }
 
     /**
