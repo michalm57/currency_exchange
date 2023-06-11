@@ -52,8 +52,10 @@ class CurrencyService
 
         $codesArray = array();
         foreach ($data as $object) {
-            $codesArray[$object->id] = $object->code;
+            $codesArray[$object->id] = $object->code . ' - ' . $object->name . ' - Value: ' . $object->rate . ' PLN';
         }
+
+        asort($codesArray);
 
         return $codesArray;
     }
