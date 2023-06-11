@@ -14,9 +14,6 @@ body {
 nav {
     text-align: center;
     word-spacing: 30px;
-}
-
-nav {
     background-color: #f7f7f7;
     padding-bottom: 35px;
     padding-top: 35px;
@@ -48,14 +45,15 @@ ul {
     color: #5ca7de;
 }
 
-#currencies-table {
+#currencies-table,
+#exchange-history-table {
     width: 100%;
     border-collapse: collapse;
 }
 
 #currencies-table th,
-#currencies-table td,
 #exchange-history-table th,
+#currencies-table td,
 #exchange-history-table td {
     padding: 8px;
     text-align: left;

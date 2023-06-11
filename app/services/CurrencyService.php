@@ -165,7 +165,7 @@ class CurrencyService
      * Validate $data for currency echange.
      *
      * @return array $data
-     * @return bool
+     * @return array
      */
     public function validateData($data)
     {

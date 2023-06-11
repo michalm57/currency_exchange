@@ -12,7 +12,7 @@ class PagesController
     private $currencyService;
 
     /**
-     * PagesController constructor.
+     * Constructor method.
      * Initializes a new instance of the PagesController class.
      */
     public function __construct()
@@ -29,7 +29,6 @@ class PagesController
      */
     public function home()
     {
-
         return view('index');
     }
 
@@ -37,7 +36,7 @@ class PagesController
      * Currencies Page Action
      *
      * This function is responsible for handling the currencies page request.
-     * It retrieves all the currencies from the CurrencyService and passes them to the view.
+     * It updates the currencies and retrieves all the currencies from the CurrencyService, passing them to the view.
      *
      * @return string The rendered view for the currencies page.
      */
@@ -51,10 +50,12 @@ class PagesController
     }
 
     /**
-     * Echchange Page Action
+     * Exchange Page Action
      *
-     * This function is responsible for handling the echange page request.
+     * This function is responsible for handling the exchange page request.
+     * It retrieves all the codes and values from the CurrencyService and passes them to the view.
      *
+     * @param bool $validationRedirect Determines if there is a validation redirect.
      * @return string The rendered view for the exchange page.
      */
     public function exchange($validationRedirect = false)
@@ -68,10 +69,12 @@ class PagesController
     }
 
     /**
-     * Calculate exchange
+     * Calculate Exchange
      *
-     * This function is responsible for calculatiing exchnages.
+     * This function is responsible for calculating exchanges.
+     * It receives the exchange data, validates it, performs the exchange, and redirects to the history page.
      *
+     * @return string The rendered view for the history page.
      */
     public function calculateExchange()
     {
@@ -105,8 +108,10 @@ class PagesController
     /**
      * Exchange History
      *
-     * This function is responsible for calculatiing exchnages.
+     * This function is responsible for retrieving the exchange history records.
      *
+     * @param bool $exchangeRedirect Determines if there is an exchange redirect.
+     * @return string The rendered view for the history page.
      */
     public function history($exchangeRedirect = false)
     {
