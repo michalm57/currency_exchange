@@ -158,4 +158,41 @@ class CurrencyService
     {
         return App::get('database')->selectAll('exchange_history');
     }
+
+    /**
+     * Validate $data for currency echange.
+     *
+     * @return array $data
+     * @return bool
+     */
+    public function validateData($data)
+    {
+        if (!is_numeric($data['amount']) || $data['amount'] < 1) {
+            return [
+                'is_valid' => false,
+                'message' => 'The value should be numeric and greater than or equal to 1.'
+            ];
+        }
+
+        $source = $this->getCurrencyRateById($data['source_currency_id']);
+        $target = $this->getCurrencyRateById($data['target_currency_id']);
+        if (is_null($source) || is_null($target)) {
+            return [
+                'is_valid' => false,
+                'message' => 'The source currency or target currency are incorrect.'
+            ];
+        }
+
+        if ($data['source_currency_id'] === $data['target_currency_id']) {
+            return [
+                'is_valid' => false,
+                'message' => 'You cannot convert the same currencies.'
+            ];
+        }
+
+        return [
+            'is_valid' => true,
+            'message' => 'The currency exchange operation was successful.'
+        ];
+    }
 }

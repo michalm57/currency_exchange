@@ -57,11 +57,14 @@ class PagesController
      *
      * @return string The rendered view for the exchange page.
      */
-    public function exchange()
+    public function exchange($validationRedirect = false)
     {
         $codesValues = $this->currencyService->getAllCodes();
 
-        return view('exchange', compact('codesValues'));
+        return view('exchange', [
+            'codesValues' => $codesValues,
+            'validationRedirect' => $validationRedirect
+        ]);
     }
 
     /**
@@ -78,17 +81,25 @@ class PagesController
             'target_currency_id' => $_POST['target_currency_id'],
         ];
 
-        //TODO
-        // $this->currencyService->validate($data);
+        $validation = $this->currencyService->validateData($data);
 
-        $_SESSION['alert'] = [
-            'type' => 'success',
-            'message' => 'The currency exchange operation was successful.'
-        ];
+        if ($validation['is_valid']) {
+            $_SESSION['alert'] = [
+                'type' => 'success',
+                'message' => $validation['message'],
+            ];
 
-        $this->currencyService->exchange($data);
+            $this->currencyService->exchange($data);
 
-        return $this->history(true);
+            return $this->history(true);
+        } else {
+            $_SESSION['alert'] = [
+                'type' => 'error',
+                'message' => $validation['message'],
+            ];
+
+            return $this->exchange(true);
+        }
     }
 
     /**
