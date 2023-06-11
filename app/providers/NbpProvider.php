@@ -4,24 +4,27 @@ namespace App\Providers;
 
 use App\Core\App;
 
-class NpbProvider
+class NbpProvider
 {
     private $curlHandle;
     private $url;
+    private $tableType;
 
     const TABLE_TYPE_A = 'A';
     const TABLE_TYPE_B = 'B';
 
     /**
-     * NpbProvider constructor.
-     *
-     * Initializes a new instance of the NpbProvider class.
+     * NbpProvider constructor.
+     * Initializes a new instance of the NbpProvider class.
      * It sets up the cURL handle and retrieves the URL from the application configuration.
+     * 
+     * @param string $tableType The type of table for which the exchange rates are retrieved.
      */
-    public function __construct()
+    public function __construct($tableType)
     {
         $this->curlHandle = curl_init();
-        $this->url = str_replace(':tableType', self::TABLE_TYPE_A, App::get('config')['npb_api']['exchange_rates_url']);
+        $this->tableType = $tableType;
+        $this->url = str_replace(':tableType', $this->tableType, App::get('config')['nbp_api']['exchange_rates_url']);
     }
 
     /**

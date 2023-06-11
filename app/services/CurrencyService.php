@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Core\App;
-use App\Providers\NpbProvider;
+use App\Providers\NbpProvider;
 
 class CurrencyService
 {
@@ -18,15 +18,17 @@ class CurrencyService
     }
 
     /**
-     * Update the currencies in the database using the NpbProvider.
+     * Update the currencies in the database using the NbpProvider.
+     *
+     * @param string $tableType The type of table for which the exchange rates are retrieved.
      */
-    public function updateCurrencies()
+    public function updateCurrencies($tableType)
     {
-        $npbProvider = new NpbProvider();
+        $nbpProvider = new NbpProvider($tableType);
 
-        $data = $npbProvider->getResponse();
+        $data = $nbpProvider->getResponse();
 
-        $rates = $npbProvider->getRates($data);
+        $rates = $nbpProvider->getRates($data);
 
         foreach ($rates as $rate) {
             App::get('database')->updateOrInsert(
