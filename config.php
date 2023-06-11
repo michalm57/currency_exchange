@@ -10,7 +10,7 @@ return [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
         ],
     ],
-    'npb_api' => [
+    'nbp_api' => [
         'exchange_rates_url' => 'http://api.nbp.pl/api/exchangerates/tables/:tableType/',
     ],
 ];
