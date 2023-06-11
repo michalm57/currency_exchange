@@ -42,17 +42,17 @@ class CurrencyService
     }
 
     /**
-     * Getting all codes from exchange_rates table into array.
-     * 
-     * @return array $codesArray
+     * Get all currency codes with details.
+     *
+     * @return array The array of currency codes with details.
      */
     public function getAllCodes()
     {
-        $data = $this->getAllCurrencies();
+        $currencies = $this->getAllCurrencies();
 
-        $codesArray = array();
-        foreach ($data as $object) {
-            $codesArray[$object->id] = $object->code . ' - ' . $object->name . ' - Value: ' . $object->rate . ' PLN';
+        $codesArray = [];
+        foreach ($currencies as $currency) {
+            $codesArray[$currency->id] = $currency->code . ' - ' . $currency->name . ' - Value: ' . $currency->rate . ' PLN';
         }
 
         asort($codesArray);
@@ -61,10 +61,10 @@ class CurrencyService
     }
 
     /**
-     * Exchange currencies and save data to exchange_history table.
-     * 
+     * Convert currency and save data to exchange_history table.
+     *
      * @param array $data An array of exchange data.
-     * @return flaot $data
+     * @return float The converted amount.
      */
     public function exchange($data)
     {
@@ -76,49 +76,49 @@ class CurrencyService
     }
 
     /**
-     * Get currency_exchanges.rate by id.
-     * 
-     * @param int $id
-     * @return float|null
+     * Get the currency rate by ID.
+     *
+     * @param int $id The ID of the currency rate.
+     * @return float|null The currency rate or null if not found.
      */
     public function getCurrencyRateById($id)
     {
-        $sourceRateCondition = "id = :id";
-        $params = array(':id' => $id);
-        $fetchedData = App::get('database')->selectWhere('exchange_rates', $sourceRateCondition, $params);
+        $condition = "id = :id";
+        $params = [':id' => $id];
+        $currency = App::get('database')->selectWhere('exchange_rates', $condition, $params);
 
-        if (!empty($fetchedData)) {
-            return (float) $fetchedData[0]->rate;
+        if (!empty($currency)) {
+            return (float) $currency[0]->rate;
         }
 
         return null;
     }
 
     /**
-     * Get currency_exchanges.name by id.
-     * 
-     * @param int $id
-     * @return string|null
+     * Get the currency code by ID.
+     *
+     * @param int $id The ID of the currency.
+     * @return string|null The currency code or null if not found.
      */
     public function getCurrencyCodeById($id)
     {
-        $sourceRateCondition = "id = :id";
-        $params = array(':id' => $id);
-        $fetchedData = App::get('database')->selectWhere('exchange_rates', $sourceRateCondition, $params);
+        $condition = "id = :id";
+        $params = [':id' => $id];
+        $currency = App::get('database')->selectWhere('exchange_rates', $condition, $params);
 
-        if (!empty($fetchedData)) {
-            return $fetchedData[0]->code;
+        if (!empty($currency)) {
+            return $currency[0]->code;
         }
 
         return null;
     }
 
     /**
-     * Convert currency based on given data
+     * Convert currency based on given data.
      *
      * @param float $amount The amount to be converted.
-     * @param float $sourceRateId
-     * @param $targetRateId
+     * @param float $sourceRateId The ID of the source currency rate.
+     * @param float $targetRateId The ID of the target currency rate.
      * @return float The converted amount.
      */
     public function convertCurrency($amount, $sourceRateId, $targetRateId)
@@ -135,26 +135,27 @@ class CurrencyService
      * Update exchange_history table.
      *
      * @param float $amount The amount to be converted.
-     * @param float $sourceRate
-     * @param float $targetRate
+     * @param float $convertedAmount The converted amount.
+     * @param float $sourceRateId The ID of the source currency rate.
+     * @param float $targetRateId The ID of the target currency rate.
      */
     public function updateExchangeHistory($amount, $convertedAmount, $sourceRateId, $targetRateId)
     {
-        $sourceName = $this->getCurrencyCodeById($sourceRateId);
-        $targetName = $this->getCurrencyCodeById($targetRateId);
+        $sourceCode = $this->getCurrencyCodeById($sourceRateId);
+        $targetCode = $this->getCurrencyCodeById($targetRateId);
 
         App::get('database')->insert('exchange_history', [
             'amount' => $amount,
-            'source_currency' => $sourceName,
-            'target_currency' => $targetName,
+            'source_currency' => $sourceCode,
+            'target_currency' => $targetCode,
             'amount_after_conversion' => $convertedAmount,
         ]);
     }
 
     /**
-     * Get records from currency_table.
+     * Get exchange history from the 'exchange_history' table.
      *
-     * @return array The array of exchange history from the 'exchange_history' table.
+     * @return array The array of exchange history.
      */
     public function getHistory()
     {
@@ -162,39 +163,39 @@ class CurrencyService
     }
 
     /**
-     * Validate $data for currency echange.
+     * Validate exchange data.
      *
-     * @return array $data
-     * @return array
+     * @param array $data An array of exchange data.
+     * @return array The validation result.
      */
     public function validateData($data)
     {
-        if (!is_numeric($data['amount']) || $data['amount'] < 1) {
+        if (!is_numeric($data['amount']) || $data['amount'] < 1 || $data['amount'] > 1000000000) {
             return [
                 'is_valid' => false,
-                'message' => 'The value should be numeric and greater than or equal to 1.'
+                'message' => 'The value should be numeric and between 1-1000000000.',
             ];
         }
 
-        $source = $this->getCurrencyRateById($data['source_currency_id']);
-        $target = $this->getCurrencyRateById($data['target_currency_id']);
-        if (is_null($source) || is_null($target)) {
+        $sourceRate = $this->getCurrencyRateById($data['source_currency_id']);
+        $targetRate = $this->getCurrencyRateById($data['target_currency_id']);
+        if (is_null($sourceRate) || is_null($targetRate)) {
             return [
                 'is_valid' => false,
-                'message' => 'The source currency or target currency are incorrect.'
+                'message' => 'The source currency or target currency is incorrect.',
             ];
         }
 
         if ($data['source_currency_id'] === $data['target_currency_id']) {
             return [
                 'is_valid' => false,
-                'message' => 'You cannot convert the same currencies.'
+                'message' => 'You cannot convert the same currencies.',
             ];
         }
 
         return [
             'is_valid' => true,
-            'message' => 'The currency exchange operation was successful.'
+            'message' => 'The currency exchange operation was successful.',
         ];
     }
 }
