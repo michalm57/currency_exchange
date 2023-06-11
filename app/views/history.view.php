@@ -18,8 +18,9 @@
             </tr>
         </thead>
         <tbody>
+            <?php $index = 0; ?>
             <?php foreach ($historyRecords as $record) : ?>
-                <tr>
+                <tr <?php (isset($exchangeRedirect) && $exchangeRedirect && $index === 0) ? print 'class="first-row"' : '' ?>>
                     <td>
                         <?= $record->amount . ' ' . $record->source_currency; ?>
                     </td>
@@ -30,6 +31,7 @@
                         <?= $record->created_at; ?>
                     </td>
                 </tr>
+                <?php $index++; ?>
             <?php endforeach; ?>
         </tbody>
     </table>
