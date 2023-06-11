@@ -54,7 +54,7 @@ class CurrencyService
 
         $codesArray = [];
         foreach ($currencies as $currency) {
-            $codesArray[$currency->id] = $currency->code . ' - ' . $currency->name . ' - Value: ' . $currency->rate . ' PLN';
+            $codesArray[$currency->id] = $currency->code . ' - ' . $currency->name;
         }
 
         asort($codesArray);
