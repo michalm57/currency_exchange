@@ -161,7 +161,7 @@ class CurrencyService
      */
     public function getHistory()
     {
-        return App::get('database')->selectAll('exchange_history');
+        return App::get('database')->selectAll('exchange_history', 'created_at DESC');
     }
 
     /**
