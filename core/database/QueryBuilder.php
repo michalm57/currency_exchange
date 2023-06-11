@@ -23,13 +23,21 @@ class QueryBuilder
      * Retrieves all rows from the specified table.
      *
      * @param string $table The name of the table to select from.
+     * @param string|null $orderBy Optional. The column and sorting direction to use for ordering the results (e.g., "column_name ASC").
      * @return array An array of objects representing the selected rows.
      */
-    public function selectAll($table)
+    public function selectAll($table, $orderBy = null)
     {
-        $query = $this->pdo->prepare("SELECT * FROM {$table}");
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_CLASS);
+        $query = "SELECT * FROM {$table}";
+
+        if ($orderBy) {
+            $query .= " ORDER BY {$orderBy}";
+        }
+    
+        $statement = $this->pdo->prepare($query);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_CLASS);
     }
 
     /**
