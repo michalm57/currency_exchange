@@ -42,8 +42,6 @@ class CurrencyController
      */
     public function currencies()
     {
-        $this->currencyService->updateCurrencies();
-
         $currencies = $this->currencyService->getAllCurrencies();
 
         return view('currencies', compact('currencies'));
