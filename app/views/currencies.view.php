@@ -11,7 +11,7 @@
         <tbody>
             <?php foreach ($currencies as $currency) : ?>
                 <tr>
-                    <td><?= $currency->name; ?></td>
+                    <td><?= ucfirst($currency->name); ?></td>
                     <td><?= $currency->code; ?></td>
                     <td><?= $currency->rate; ?></td>
                 </tr>
