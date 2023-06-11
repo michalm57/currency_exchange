@@ -21,7 +21,7 @@ class NpbProvider
     public function __construct()
     {
         $this->curlHandle = curl_init();
-        $this->url = str_replace(':tableType', self::TABLE_TYPE_A, App::get('config')['npb_api']['echange_rates_url']);    
+        $this->url = str_replace(':tableType', self::TABLE_TYPE_A, App::get('config')['npb_api']['exchange_rates_url']);
     }
 
     /**
@@ -36,14 +36,13 @@ class NpbProvider
 
         $response = curl_exec($this->curlHandle);
 
-        if ($e = curl_error($this->curlHandle)) {
-            echo "Problem with connection!";
-        } else {
-            $decodedData = json_decode($response, true);
-            return $decodedData;
+        if ($error = curl_error($this->curlHandle)) {
+            throw new Exception("Connection error: $error");
         }
 
         curl_close($this->curlHandle);
+
+        return json_decode($response, true);
     }
 
     /**
