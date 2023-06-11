@@ -27,4 +27,10 @@
     ErrorDocument 403 /404.html
 </Files>
 
+<Files "update_currencies.php">
+    Order allow,deny
+    deny from all
+    ErrorDocument 403 /404.html
+</Files>
+
 ErrorDocument 404 core/error.php
