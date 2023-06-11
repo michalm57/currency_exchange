@@ -11,6 +11,6 @@ return [
         ],
     ],
     'npb_api' => [
-        'echange_rates_url' => 'http://api.nbp.pl/api/exchangerates/tables/:tableType/',
+        'exchange_rates_url' => 'http://api.nbp.pl/api/exchangerates/tables/:tableType/',
     ],
 ];
