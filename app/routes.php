@@ -8,14 +8,14 @@
  */
 
 //Home
-$router->get('', 'PagesController@home');
+$router->get('', 'CurrencyController@home');
 
 //Currencies
-$router->get('currencies', 'PagesController@currencies');
+$router->get('currencies', 'CurrencyController@currencies');
 
 //Currrency exchange
-$router->get('exchange', 'PagesController@exchange');
-$router->post('exchange/calculate-exchange', 'PagesController@calculateExchange');
+$router->get('exchange', 'CurrencyController@exchange');
+$router->post('exchange/calculate-exchange', 'CurrencyController@calculateExchange');
 
 //Exchange history
-$router->get('history', 'PagesController@history');
+$router->get('history', 'CurrencyController@history');

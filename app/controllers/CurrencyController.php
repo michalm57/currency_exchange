@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Services\CurrencyService;
 
-class PagesController
+class CurrencyController
 {
     /**
      * @var CurrencyService $currencyService
@@ -13,7 +13,7 @@ class PagesController
 
     /**
      * Constructor method.
-     * Initializes a new instance of the PagesController class.
+     * Initializes a new instance of the CurrencyController class.
      */
     public function __construct()
     {
