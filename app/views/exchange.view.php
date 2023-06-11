@@ -11,7 +11,7 @@
     <form method="POST" action="/exchange/calculate-exchange" class="form form-container">
         <div class="form-group">
             <label for="amount">Amount:</label>
-            <input type="number" id="amount" name="amount" required class="form-control" min="1" step="any" placeholder="Amount">
+            <input type="number" id="amount" name="amount" required class="form-control" min="1" max="1000000000" step="any" placeholder="Amount">
         </div>
 
         <div class="form-group">
