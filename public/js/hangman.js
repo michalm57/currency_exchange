@@ -1,8 +1,19 @@
-let items = ["Better late than never", "Lubie placki", "Hello world", "Type Script", "Java Script", "Kotlin", "Minecraft", "Iphone", "Apple"];
+let items = [
+    { word: "Better late than never", category: "Proverb" },
+    { word: "Lubie placki", category: "Phrase" },
+    { word: "Hello world", category: "Phrase" },
+    { word: "Type Script", category: "Programming Language" },
+    { word: "Java Script", category: "Programming Language" },
+    { word: "Kotlin", category: "Programming Language" },
+    { word: "Minecraft", category: "Game" },
+    { word: "Iphone", category: "Technology" },
+    { word: "Apple", category: "Fruit" }
+];
 
 let words = items[Math.floor(Math.random()*items.length)];
+let category = words.category;
 
-words = words.toUpperCase();
+words = words.word.toUpperCase();
 
 let letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
@@ -37,7 +48,7 @@ function showLetters() {
             alphabetContent += '<div class="clear-both"></div>'
         }
     }
-
+    document.getElementById('category').innerHTML = "Category: " + category;
     document.getElementById('alphabet').innerHTML = alphabetContent;
 
     printWords();
