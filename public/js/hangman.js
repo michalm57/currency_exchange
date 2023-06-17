@@ -38,6 +38,8 @@ for (let i = 0; i < stringLength; i++) {
     }
 }
 
+// Functions
+
 function printWords() {
     document.getElementById('board').innerHTML = hiddenWords;
 }
