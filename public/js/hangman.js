@@ -99,12 +99,12 @@ function checkLetter(number) {
         document.getElementById("gallows").innerHTML = '<img src="'+ image +'" alt="" width="400"/>';
     }
 
-    //win
+    //Win
     if(words == hiddenWords){
         document.getElementById("alphabet").innerHTML = "Congratulations! You guessed the proverb: " + words + '<br/><br/><span class="reset" onclick="location.reload()">Play again?</span>';
     }
 
-    //lose
+    //Lose
     if(countOfFails >= 9){
         document.getElementById("alphabet").innerHTML = "Game Over! Correct proverb is: " + words + '<br/><br/><span class="reset" onclick="location.reload()">Play again?</span>';
     }
