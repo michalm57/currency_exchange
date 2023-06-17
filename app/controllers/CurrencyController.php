@@ -121,8 +121,8 @@ class CurrencyController
         ]);
     }
 
-    public function hangman()
+    public function game()
     {
-        return view('hangman');
+        return view('game');
     }
 }
