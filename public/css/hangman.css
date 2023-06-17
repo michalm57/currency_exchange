@@ -6,7 +6,6 @@ body {
     font-weight: 700;
 }
 
-
 .wrapper {
     width: 900px;
     margin-left: auto;
@@ -35,7 +34,6 @@ body {
     text-align: center;
     min-height: 280px;
 }
-
 
 .clear-both {
     clear: both;
