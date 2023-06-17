@@ -26,6 +26,7 @@ let hiddenWords = "";
 let countOfFails = 0;
 
 //Sounds
+
 let yesAudio = new Audio("public/sounds/yes.wav");
 let noAudio = new Audio("public/sounds/no.wav");
 
