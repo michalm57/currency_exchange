@@ -21,6 +21,7 @@
 
 <body>
 <div class="wrapper">
+    <div id="category"></div>
     <div id="board"></div>
     <div id="gallows">
         <img src="public/images/image_0.png"  width="400"/>

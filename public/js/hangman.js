@@ -11,10 +11,9 @@ let items = [
 ];
 
 let words = items[Math.floor(Math.random()*items.length)];
+let category = words.category;
 
-let category = randomItem.category;
-
-words = words.toUpperCase();
+words = words.word.toUpperCase();
 
 let letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
