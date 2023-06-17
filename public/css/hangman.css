@@ -1,0 +1,70 @@
+body {
+    background-color: #222222;
+    color: lightgray;
+    font-size: 28px;
+    font-family: 'Inconsolata', monospace;
+    font-weight: 700;
+}
+
+
+.wrapper {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#board {
+    width: 900px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 48px;
+    min-height: 60px;
+}
+
+#gallows {
+    float: left;
+    width: 450px;
+    text-align: center;
+    min-height: 280px;
+}
+
+#alphabet {
+    float: left;
+    width: 450px;
+    text-align: center;
+    min-height: 280px;
+}
+
+
+.clear-both {
+    clear: both;
+}
+
+.letter {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 5px;
+    margin: 5px;
+    border: 3px solid gray;
+    float: left;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.letter:hover {
+    background-color: gray;
+    color: #fff;
+    border: 3px solid #fff;
+}
+
+.reset {
+    cursor: pointer;
+    color: green;
+    font-size: 48px;
+}
+
+.reset:hover {
+    color: white;
+}
