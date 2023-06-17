@@ -1,3 +1,5 @@
+//Items and categories and variables
+
 let items = [
     { word: "Better late than never", category: "Proverb" },
     { word: "Lubie placki", category: "Phrase" },
@@ -33,6 +35,8 @@ for (let i = 0; i < stringLength; i++) {
         hiddenWords += "-";
     }
 }
+
+// Functions
 
 function printWords() {
     document.getElementById('board').innerHTML = hiddenWords;
