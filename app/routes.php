@@ -19,3 +19,6 @@ $router->post('exchange/calculate-exchange', 'CurrencyController@calculateExchan
 
 //Exchange history
 $router->get('history', 'CurrencyController@history');
+
+//Game
+$router->get('game', 'CurrencyController@game');
