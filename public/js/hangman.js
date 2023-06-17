@@ -1,3 +1,5 @@
+//Items and categories
+
 let items = [
     { word: "Better late than never", category: "Proverb" },
     { word: "Lubie placki", category: "Phrase" },
