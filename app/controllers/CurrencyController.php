@@ -120,4 +120,9 @@ class CurrencyController
             'exchangeRedirect' => $exchangeRedirect
         ]);
     }
+
+    public function hangman()
+    {
+        return view('hangman');
+    }
 }
